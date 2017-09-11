@@ -76,11 +76,11 @@ stage name:'Deploy to staging', concurrency:1
 
 
 stage name:'Shutdown staging'
-     {
+     
                 
         dir('BuildQuality'){
         sh 'sudo docker-compose stop'
-    }
+    
                 
 }
 }
