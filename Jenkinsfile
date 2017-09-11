@@ -57,7 +57,7 @@ stage name:'Deploy to staging', concurrency:1
 }
 
 
-    def mvnHome
+   // def mvnHome
     dir('FunctionalTests'){
 
         stage('Get Functional Test Scripts'){                        
