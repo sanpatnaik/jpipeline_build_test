@@ -5,25 +5,6 @@ node{
         stage('Preparation'){
           git 'https://github.com/sanpatnaik/simple-spring.git'
         }
-        stage('SonarQube Analysis') { 
-            def scannerHome = tool 'SQScanner';
-            withSonarQubeEnv('Sonar') { 
-                if (isUnix()) {
-                    sh "${scannerHome}/bin/sonar-scanner" + 
-                    " -Dsonar.projectKey=org.sonarqube:java-sonar_MVN_SQ " +
-                    " -Dsonar.projectName='Java :: Simple Spring Project_MVN_SQ' " +
-                    " -Dsonar.projectVersion=1.0 " +
-                    " -Dsonar.language=java " +
-                    " -Dsonar.sources=. " +
-                    " -Dsonar.tests=. " +
-                    " -Dsonar.test.inclusions='**/*Test*/**' " +
-                    " -Dsonar.exclusions='**/*Test*/**' "
-                } else {
-                    bat (/"${mvnHome}\bin\mvn" org.sonarsource.scanner.maven:sonar-maven-plugin:3.3.0.603:sonar -f pom.xml -Dsonar.projectKey=org.sonarqube:java-sonar_MVN_SQ -Dsonar.projectName="Java :: Simple Spring Project_MVN_SQ" /)
-                }    
-            }        
-        }
-
         stage('Unit Test Results') {
             junit '**/target/surefire-reports/TEST-*.xml'
             //archive 'target/*.jar'
